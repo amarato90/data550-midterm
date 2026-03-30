@@ -30,6 +30,16 @@ position_pts_summary <- nba_data %>%
     .groups = "drop"
   )
 
+position_pts_anova_output <- list(
+  title = "Table 1. Analysis of Variance (ANOVA) for Points per 36 Minutes by Player Position",
+  table = position_pts_results
+)
+
+position_pts_summary_output <- list(
+  title = "Table 2. Descriptive Statistics of Points per 36 Minutes by Player Position",
+  table = position_pts_summary
+)
+
 # -----------------------------
 # 2. Linear Regression: Age vs Minutes Played
 # -----------------------------
@@ -37,6 +47,11 @@ position_pts_summary <- nba_data %>%
 
 age_mins_lm <- lm(mins_played ~ age, data = nba_data)
 age_mins_results <- tidy(age_mins_lm, conf.int = TRUE)
+
+age_mins_output <- list(
+  title = "Table 3. Linear Regression of Minutes Played on Age",
+  table = age_mins_results
+)
 
 # -----------------------------
 # 3. Linear Regression: Games vs Defensive Rebounds
@@ -46,10 +61,19 @@ age_mins_results <- tidy(age_mins_lm, conf.int = TRUE)
 games_dreb_lm <- lm(rebounds_defensive ~ games, data = nba_data)
 games_dreb_results <- tidy(games_dreb_lm, conf.int = TRUE)
 
-# Save outputs directly in output/
-saveRDS(position_pts_results, here("output", "position_pts_anova_results.rds"))
-saveRDS(position_pts_summary, here("output", "position_pts_summary.rds"))
-saveRDS(age_mins_results, here("output", "age_mins_regression_results.rds"))
-saveRDS(games_dreb_results, here("output", "games_dreb_regression_results.rds"))
+games_dreb_output <- list(
+  title = "Table 4. Linear Regression of Defensive Rebounds on Games Played",
+  table = games_dreb_results
+)
 
-cat("sara_analysis.R complete — outputs saved to output/\n")
+# Save outputs directly in output/
+saveRDS(position_pts_anova_output, here("output", "position_pts_anova_results.rds"))
+saveRDS(position_pts_summary_output, here("output", "position_pts_summary.rds"))
+saveRDS(age_mins_output, here("output", "age_mins_regression_results.rds"))
+saveRDS(games_dreb_output, here("output", "games_dreb_regression_results.rds"))
+
+cat("sara_analysis.R complete — titled outputs saved to output/\n")
+
+anova_obj <- readRDS(here::here("output", "position_pts_anova_results.rds"))
+anova_obj$title
+anova_obj$table
