@@ -25,7 +25,11 @@ output/scatter_plot_3.png: code/Shravya_graphs.R data_clean/nba_combined.csv
 	Rscript code/Shravya_graphs.R
 
 ## This clean: command removes outputs
+.PHONY: clean
 clean:
-	rm -f output/*.rds
-	rm -f output/*.png
-	rm -f report.html
+	rm -f output/*.rds && rm -f output/*.png && rm -f report.html
+	
+## This install: command restores R package environment to that of lockfile
+.PHONY: install
+install:
+	Rscript -e "renv::restore(prompt = FALSE)"

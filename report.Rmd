@@ -12,8 +12,10 @@ library(here)
 library(knitr)
 library(dplyr)
 
-anova_obj <- readRDS(here("output", "position_pts_anova_results.rds"))
-summary_obj <- readRDS(here("output", "position_pts_summary.rds"))
+# Read ANOVA in
+anova_obj <- readRDS(here("output", "position_pts_anova_results.rds")) 
+# Read 
+summary_obj <- readRDS(here("output", "position_pts_summary.rds")) 
 age_obj <- readRDS(here("output", "age_mins_regression_results.rds"))
 games_obj <- readRDS(here("output", "games_dreb_regression_results.rds"))
 ```
